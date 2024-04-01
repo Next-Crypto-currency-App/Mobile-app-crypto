@@ -36,6 +36,8 @@ import './theme/variables.css';
 import NewPage from './pages/NewPage';
 import MainRoutes from './routes/mainRoutes';
 import AuthRoutes from './routes/authRoutes';
+import MainMenu from './components/menu/MainMenu';
+import 'swiper/css';
 
 setupIonicReact();
 
@@ -44,7 +46,9 @@ const App: React.FC = () => {
   const authenticatedUser = true;
   return (
     <IonApp>
+
       <IonReactRouter>
+
         {
           authenticatedUser ? <MainRoutes /> : <AuthRoutes />
         }
