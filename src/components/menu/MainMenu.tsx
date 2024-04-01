@@ -3,12 +3,14 @@ import { moonOutline, notificationsOutline, personOutline } from 'ionicons/icons
 import React, { useEffect, useState } from 'react'
 import { toggleDarkTheme } from '../../utils';
 import { useDispatch } from 'react-redux';
-import { logoutUser } from '../../redux/userSlice';
+import { logoutUser, selectUser } from '../../redux/userSlice';
+import { useSelector } from 'react-redux';
 
 const MainMenu = () => {
     const themeLocalStorage = localStorage.getItem('theme')
     const [themeValue, setThemeValue] = useState(themeLocalStorage === 'dark' ? true : false)
     const dispatch = useDispatch()
+    const user = useSelector(selectUser)
 
     useEffect(() => {
 
@@ -29,12 +31,12 @@ const MainMenu = () => {
     }
     return (
         <IonMenu contentId='main-menu-content'  >
-            <IonHeader>
+            <IonHeader className='ion-no-border'>
                 <IonToolbar>
                     <div className="flex justify-center flex-col items-center py-10 min-h-[20vh] gap-y-1">
                         <img src="/assets/avatar.svg" className='w-20' alt="" />
                         <h2>Joh Moris</h2>
-                        <p>john@gmail.com</p>
+                        <p>{user.email}</p>
                     </div>
                 </IonToolbar>
             </IonHeader>
