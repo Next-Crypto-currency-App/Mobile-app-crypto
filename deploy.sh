@@ -2,7 +2,7 @@
 
 # Add all files to git
 git add .
-git commit -m "added user state"
+git commit -m "updated login"
 git push
 
 # Deploy to firebase

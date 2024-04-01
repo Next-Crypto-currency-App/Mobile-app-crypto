@@ -1,14 +1,17 @@
 import { IonButton, IonButtons, IonCheckbox, IonContent, IonHeader, IonIcon, IonInput, IonPage, IonProgressBar, IonToolbar } from '@ionic/react'
-import React from 'react'
+import React, { useState } from 'react'
 import AuthRoutes, { authPages } from '../../routes/authRoutes'
 import { close, eyeOff, eyeOutline } from 'ionicons/icons'
+import AppPasswordInput from '../../components/@/AppPasswordInput'
 
 const LoginPage = () => {
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
     return (
         <IonPage>
-            <IonToolbar color={'none'}>
 
-            </IonToolbar>
             <IonContent className='ion-padding space-y-10'>
                 <div>
 
@@ -17,25 +20,26 @@ const LoginPage = () => {
                 <form action="" className='space-y-3'>
                     <div>
                         <label >Email</label>
-                        <IonInput fill='outline' className='border rounded-md ion-padding-horizontal' />
+                        <IonInput required onIonChange={(e) => setEmail(e.detail.value as string)} value={email} type='email' fill='outline' className='border rounded-md ion-padding-horizontal' />
                     </div>
 
                     <div>
                         <label >Password</label>
-                        <div className='border rounded-md flex pl-4'>
-                            <IonInput fill='outline' className='  ' />
-                            <IonButton fill='clear' size='small'>
-                                <IonIcon icon={eyeOutline} />
-                            </IonButton>
+                        <div >
+                            <AppPasswordInput value={password} onChange={(val) => setPassword(val)} />
                         </div>
+                    </div>
+                    <div className='pt-10 space-y-2'>
+                        <IonButton onClick={() => { }} expand='block'>
+                            Login
+                        </IonButton>
+                        <IonButton fill='clear' routerLink={authPages.signup.url} expand='block'>
+                            Create Account Instead
+                        </IonButton>
                     </div>
                 </form>
 
-                <div>
-                    <IonButton routerLink={authPages.signup.url} expand='block'>
-                        Login
-                    </IonButton>
-                </div>
+
             </IonContent>
         </IonPage>
     )
