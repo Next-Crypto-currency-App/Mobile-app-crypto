@@ -6,4 +6,4 @@ git commit -m "updated light mode dark mode"
 git push
 
 # Deploy to firebase
-npx run build && firebase deploy
+npm run build && firebase deploy
