@@ -45,6 +45,7 @@ const App: React.FC = () => {
   const authenticatedUser = user.email ? true : false;
 
 
+  console.log({ user })
 
   return (
     <IonApp>

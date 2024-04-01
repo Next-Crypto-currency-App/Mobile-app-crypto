@@ -7,23 +7,31 @@ interface UserState {
     email?: string;
 }
 
+
+
 const initialState: UserState = {};
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUser(state, action) {
+        setUserState(state, action: { payload: UserState }) {
             state = action.payload; // Immutably assign new user data
             localStorage.setItem('user', JSON.stringify(state)); // Store user data in local storage
         },
-        logout(state) {
+        logoutUser(state) {
             state = initialState; // Reset state to clear user info
             localStorage.clear() // Remove user data from local storage
+            location.href = "/"
         },
     },
 });
 
-export const { setUser, logout } = userSlice.actions;
-export const selectUser = (state: RootState) => state.user;
+export const { setUserState, logoutUser } = userSlice.actions;
+export const selectUser = (state: RootState) => {
+    if (state.user.email) return state.user
+    const localUser = localStorage.getItem('user');
+    if (localUser) return JSON.parse(localUser);
+    return {}
+};
 export default userSlice.reducer;

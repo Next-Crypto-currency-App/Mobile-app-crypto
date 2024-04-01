@@ -2,7 +2,7 @@
 
 # Add all files to git
 git add .
-git commit -m "updated login"
+git commit -m "added login and signup functionalities"
 git push
 
 # Deploy to firebase

@@ -5,7 +5,7 @@ import React from 'react'
 const AppProgressHeader: React.FC<{ value: number, total: number }> = ({ total, value }) => {
     return (
         <IonHeader className='ion-no-border'>
-            <IonToolbar color='none' className=''>
+            <IonToolbar className=''>
                 <div>
                     <div className='flex items-center justify-between '>
                         <IonButtons slot='start'>

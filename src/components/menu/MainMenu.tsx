@@ -2,10 +2,13 @@ import { IonAvatar, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, I
 import { moonOutline, notificationsOutline, personOutline } from 'ionicons/icons'
 import React, { useEffect, useState } from 'react'
 import { toggleDarkTheme } from '../../utils';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../redux/userSlice';
 
 const MainMenu = () => {
     const themeLocalStorage = localStorage.getItem('theme')
     const [themeValue, setThemeValue] = useState(themeLocalStorage === 'dark' ? true : false)
+    const dispatch = useDispatch()
 
     useEffect(() => {
 
@@ -21,7 +24,9 @@ const MainMenu = () => {
 
     }, []);
 
-
+    function logout() {
+        dispatch(logoutUser())
+    }
     return (
         <IonMenu contentId='main-menu-content'  >
             <IonHeader>
@@ -66,8 +71,12 @@ const MainMenu = () => {
                         <IonItem lines='none' button>
                             <IonLabel>Support</IonLabel>
                         </IonItem>
+                        <IonItem lines='none' button>
+                            <IonLabel color={'danger'} onClick={logout}>Logout</IonLabel>
+                        </IonItem>
                     </IonList>
                 </div>
+
             </IonContent>
         </IonMenu>
     )
