@@ -55,7 +55,7 @@ const FeedPage = () => {
                 <main className=''>
 
                     <div className="w-[100vw]  overflow-x-scroll">
-                        <div className="w-[150vw]">
+                        <div className="w-[150vw] py-2">
                             {
                                 newsCategories.map((cat, index) => (
                                     <IonChip key={index} className='p-2' color={index == 0 ? "danger" : ""}>

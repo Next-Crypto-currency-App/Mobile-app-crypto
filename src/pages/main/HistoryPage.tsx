@@ -20,12 +20,12 @@ const HistoryPage = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent className=''>
-                <IonSegment value={tab} onIonChange={(e) => setTab(e.detail.value as string)}>
-                    <IonSegmentButton value={"all"}>All</IonSegmentButton>
-                    <IonSegmentButton>Deposits</IonSegmentButton>
-                    <IonSegmentButton>Withdrawals</IonSegmentButton>
-                    <IonSegmentButton>Swap</IonSegmentButton>
-                    <IonSegmentButton>Transfers</IonSegmentButton>
+                <IonSegment scrollable value={tab} onIonChange={(e) => setTab(e.detail.value as string)}>
+                    <IonSegmentButton value={"all"}><small>All</small> </IonSegmentButton>
+                    <IonSegmentButton><small>Deposits</small></IonSegmentButton>
+                    <IonSegmentButton><small>Withdrawals</small></IonSegmentButton>
+                    <IonSegmentButton><small>Swap</small></IonSegmentButton>
+                    <IonSegmentButton><small>Transfers</small></IonSegmentButton>
                 </IonSegment>
                 <IonList className='py-3'>
                     {

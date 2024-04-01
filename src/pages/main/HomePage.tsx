@@ -56,7 +56,7 @@ const HomePage = () => {
                         </div>
                     </div>
                     <section className='space-y-4 pt-3 relative'>
-                        <div className='z-10 sticky top-0 bg-[var(--ion-color-light)]'>
+                        <div className='z-10 sticky -top-5 bg-[var(--ion-color-light)]'>
                             <IonSegment value={currentList} onIonChange={(e) => setCurrentList(e.detail.value as "watch")}>
                                 <IonSegmentButton value={"watch"}>Watch List</IonSegmentButton>
                                 <IonSegmentButton value={"all"}>Coins</IonSegmentButton>

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from './store';
 
 interface UserState {
     id?: number; // Optional for flexibility
@@ -22,4 +23,5 @@ const userSlice = createSlice({
 });
 
 export const { setUser, logout } = userSlice.actions;
+export const selectUser = (state: RootState) => state.user;
 export default userSlice.reducer;
