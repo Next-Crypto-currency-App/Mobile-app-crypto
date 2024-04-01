@@ -2,7 +2,7 @@
 
 # Add all files to git
 git add .
-git commit -m "added login and signup functionalities"
+git commit -m "added assets page"
 git push
 
 # Deploy to firebase

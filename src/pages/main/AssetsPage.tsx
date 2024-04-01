@@ -1,11 +1,11 @@
 import { IonAvatar, IonBadge, IonButton, IonButtons, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonItem, IonItemDivider, IonMenuButton, IonPage, IonSearchbar, IonSegment, IonSegmentButton, IonSelect, IonTitle, IonToolbar } from '@ionic/react'
-import { arrowDown, arrowUp, cardOutline, chevronDown, eyeOutline, moonOutline, notifications, notificationsOutline, qrCodeOutline, scanOutline } from 'ionicons/icons'
+import { arrowDown, arrowUp, cardOutline, caretUpCircleOutline, chevronDown, downloadOutline, eyeOutline, moonOutline, notifications, notificationsOutline, qrCodeOutline, scanOutline, swapVerticalOutline, timeOutline } from 'ionicons/icons'
 import React, { useState } from 'react'
 import WatchListSection from '../../components/home/WatchListSection'
 import HomeWalletBalance from '../../components/home/HomeWalletBalance'
 
-const HomePage = () => {
-    const [currentList, setCurrentList] = useState<"watch" | "all">("watch");
+const AssetsPage = () => {
+    const [currentList, setCurrentList] = useState<"crypto" | "all" | 'fiat'>("all");
 
     return (
         <IonPage>
@@ -14,7 +14,7 @@ const HomePage = () => {
                     <IonButtons slot='start'>
                         <IonMenuButton />
                     </IonButtons>
-                    <IonTitle>Next Crypto</IonTitle>
+                    <IonTitle>Assets</IonTitle>
                     <IonButtons slot='end'>
                         <IonButton size='small'>
                             <IonIcon icon={scanOutline} />
@@ -32,37 +32,38 @@ const HomePage = () => {
                     <div className="flex justify-between text-center border-b">
                         <div>
                             <IonFabButton mode='ios' size='small'>
-                                <IonIcon icon={arrowUp} />
+                                <IonIcon icon={downloadOutline} />
                             </IonFabButton>
-                            <label htmlFor="">Send</label>
+                            <label htmlFor="">Deposit</label>
                         </div>
                         <div>
                             <IonFabButton mode='ios' size='small'>
-                                <IonIcon icon={arrowDown} />
+                                <IonIcon icon={caretUpCircleOutline} />
                             </IonFabButton>
-                            <label htmlFor="">Receive</label>
+                            <label htmlFor="">Withdraw</label>
                         </div>
                         <div>
                             <IonFabButton mode='ios' size='small'>
-                                <IonIcon icon={cardOutline} />
+                                <IonIcon icon={swapVerticalOutline} />
                             </IonFabButton>
-                            <label htmlFor="">Buy</label>
+                            <label htmlFor="">Swap</label>
                         </div>
                         <div>
                             <IonFabButton mode='ios' size='small'>
-                                <IonIcon icon={moonOutline} />
+                                <IonIcon icon={timeOutline} />
                             </IonFabButton>
-                            <label htmlFor="">Sell</label>
+                            <label htmlFor="">History</label>
                         </div>
                     </div>
                     <section className='space-y-4 pt-3 relative'>
                         <div className='z-10 sticky -top-5 bg-[var(--ion-color-light)]'>
-                            <IonSegment value={currentList} onIonChange={(e) => setCurrentList(e.detail.value as "watch")}>
-                                <IonSegmentButton value={"watch"}>Watch List</IonSegmentButton>
-                                <IonSegmentButton value={"all"}>Coins</IonSegmentButton>
+                            <IonSegment value={currentList} onIonChange={(e) => setCurrentList(e.detail.value as "all")}>
+                                <IonSegmentButton value={"all"}>All</IonSegmentButton>
+                                <IonSegmentButton value={"crypto"}>Crypto</IonSegmentButton>
+                                <IonSegmentButton value={"fiat"}>Fiat</IonSegmentButton>
                             </IonSegment>
                         </div>
-                        {currentList == "watch" ? <WatchListSection cryptocurrencies={cryptocurrencies} /> : <WatchListSection cryptocurrencies={cryptocurrencies.reverse()} />}
+                        {currentList == "all" ? <WatchListSection cryptocurrencies={cryptocurrencies} /> : currentList == "crypto" ? <WatchListSection cryptocurrencies={cryptocurrencies.reverse().filter((a, i) => i % 2 == 0)} /> : <WatchListSection cryptocurrencies={cryptocurrencies.filter((a, i) => i % 2 != 0)} />}
                     </section>
                 </main>
 
@@ -71,7 +72,7 @@ const HomePage = () => {
     )
 }
 
-export default HomePage
+export default AssetsPage
 
 export const cryptocurrencies = [
     {

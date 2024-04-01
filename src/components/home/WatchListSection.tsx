@@ -16,7 +16,7 @@ const WatchListSection: React.FC<{ cryptocurrencies: typeof cryptocurrencies }> 
         <section className='space-y-3'>
             {loading && <ItemsLoader />}
             {
-                cryptocurrencies.map((crypto, index) => {
+                cryptocurrencies.reverse().map((crypto, index) => {
                     return (
                         <IonItem key={index} lines='full' className='py-[2px]'>
                             <img className='w-10 h-10' slot='start' src={crypto.image_url} />

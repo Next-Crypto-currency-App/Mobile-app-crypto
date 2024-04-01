@@ -1,16 +1,12 @@
-import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel, IonRoute } from '@ionic/react'
-import { shirtOutline, ellipse, square, pieChartOutline, homeOutline, chatboxEllipsesOutline, timeOutline } from 'ionicons/icons'
-import React from 'react'
+import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react'
+import { pieChartOutline, homeOutline, chatboxEllipsesOutline, timeOutline } from 'ionicons/icons'
 import { Route, Redirect } from 'react-router'
-import NewPage from '../pages/NewPage'
-import Tab1 from '../pages/Tab1'
-import Tab2 from '../pages/Tab2'
-import Tab3 from '../pages/Tab3'
 import HomePage from '../pages/main/HomePage'
 import MainMenu from '../components/menu/MainMenu'
 import FeedPage from '../pages/main/FeedPage'
 import FeedDetail from '../pages/main/FeedDetail'
 import HistoryPage from '../pages/main/HistoryPage'
+import AssetsPage from '../pages/main/AssetsPage'
 
 const MainRoutes = () => {
     return (
@@ -67,7 +63,7 @@ export const mainPages = {
     assets: {
         name: "Assets",
         url: "/assets",
-        page: HomePage
+        page: AssetsPage
     },
     feed: {
         name: "Feed",
