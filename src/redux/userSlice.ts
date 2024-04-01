@@ -15,9 +15,11 @@ const userSlice = createSlice({
     reducers: {
         setUser(state, action) {
             state = action.payload; // Immutably assign new user data
+            localStorage.setItem('user', JSON.stringify(state)); // Store user data in local storage
         },
         logout(state) {
             state = initialState; // Reset state to clear user info
+            localStorage.clear() // Remove user data from local storage
         },
     },
 });

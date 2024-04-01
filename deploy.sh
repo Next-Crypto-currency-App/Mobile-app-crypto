@@ -2,7 +2,7 @@
 
 # Add all files to git
 git add .
-git commit -m "updated light mode dark mode"
+git commit -m "added user state"
 git push
 
 # Deploy to firebase

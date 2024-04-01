@@ -10,10 +10,6 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, shirtOutline, square, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -38,12 +34,18 @@ import MainRoutes from './routes/mainRoutes';
 import AuthRoutes from './routes/authRoutes';
 import MainMenu from './components/menu/MainMenu';
 import 'swiper/css';
+import { useSelector } from 'react-redux';
+import { selectUser } from './redux/userSlice';
 
 setupIonicReact();
 
 const App: React.FC = () => {
 
-  const authenticatedUser = true;
+  const user = useSelector(selectUser)
+  const authenticatedUser = user.email ? true : false;
+
+
+
   return (
     <IonApp>
 

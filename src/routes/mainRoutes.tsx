@@ -84,5 +84,10 @@ export const mainPages = {
         url: "/history",
         page: HistoryPage
     },
+    notFound: {
+        name: "Not Found",
+        url: "*",
+        page: HomePage
+    }
 
 }

@@ -55,5 +55,10 @@ export const authPages = {
         name: "set-password",
         url: "/set-password",
         page: SetPasswordPage
+    },
+    notFound: {
+        name: "Not Found",
+        url: "*",
+        page: LoginPage
     }
 }
