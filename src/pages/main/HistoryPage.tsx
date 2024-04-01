@@ -8,7 +8,7 @@ const HistoryPage = () => {
         <IonPage>
             <IonHeader className='ion-no-border'>
                 <IonToolbar className='' >
-                    <IonButtons>
+                    <IonButtons slot='start'>
                         <IonMenuButton />
                     </IonButtons>
                     <IonTitle>History</IonTitle>
