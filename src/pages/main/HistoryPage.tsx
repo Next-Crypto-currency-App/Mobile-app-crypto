@@ -30,21 +30,21 @@ const HistoryPage = () => {
                 <IonList className='py-3'>
                     {
                         history.map((transaction, index) => (
-                            <div className="flex justify-between text-sm p-2 border-b">
+                            <div key={index} className="flex justify-between text-sm p-2 border-b">
                                 <div>
                                     <h3>{transaction.transactionId}</h3>
-                                    <p className='text-green-500'>{transaction.status} </p>
+                                    <div className='text-green-500'>{transaction.status} </div>
                                 </div>
                                 <div>
-                                    <p>{transaction.amount} {transaction.currency}</p>
-                                    <p>{transaction.status}</p>
+                                    <div>{transaction.amount} {transaction.currency}</div>
+                                    <div>{transaction.status}</div>
                                 </div>
                             </div>
                         ))
                     }
                 </IonList>
             </IonContent>
-        </IonPage>
+        </IonPage >
     )
 }
 

@@ -6,6 +6,7 @@ import AppPasswordInput from '../../components/@/AppPasswordInput'
 import { useDispatch } from 'react-redux'
 import { setUserState } from '../../redux/userSlice'
 import AppButtonText from '../../components/@/AppButtonText'
+import { useAuth } from '../../hooks/useAuth'
 
 const LoginPage = () => {
 
@@ -13,18 +14,25 @@ const LoginPage = () => {
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
+    const { login } = useAuth()
 
 
-    function submit(e: React.FormEvent) {
+    async function submit(e: React.FormEvent) {
         e.preventDefault()
         setLoading(true)
+        const result = await login({ email, password }) as { success: boolean, username: string, email: string }
+        setLoading(false)
 
-        setTimeout(() => {
-            dispatch(setUserState({ email, name: "John Doe", id: 1 }))
+        if (result.success) {
+            dispatch(setUserState({
+                username: result.username,
+                email: result.email
+            }));
             location.href = "/"
-            location.reload()
-            setLoading(false)
-        }, 4000);
+            setTimeout(() => {
+                location.reload()
+            }, 1000);
+        }
 
 
     }

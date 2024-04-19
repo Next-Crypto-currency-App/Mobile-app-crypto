@@ -24,33 +24,33 @@ const FeedDetail = () => {
                     <h1 className='text-xl font-bold'>Collapse big bitcoin peak in Australia after Elon</h1>
                     <div className="flex gap-2 items-center text-gray-500 text-sm">
                         <img src="https://neweralive.na/storage/images/2023/may/lloyd-sikeba.jpg" className='w-8 h-8 rounded-full object-cover' alt="" />
-                        <p>Lloyd Sikeba</p>
+                        <div>Lloyd Sikeba</div>
                         <div className="w-[3px] h-[3px] bg-gray-500 rounded-full"></div>
                         Wed 05, July 2022
                     </div>
-                    <p className=' text-sm'>
+                    <div className=' text-sm'>
                         The price of bitcoin has collapsed in Australia after the country's
                         financial regulator said it would consider banning the cryptocurrency.
                         The Australian Securities and Investments Commission (ASIC) said it was
                         considering whether to ban the sale of bitcoin and other cryptocurrencies
                         to retail investors.
-                    </p>
+                    </div>
                     <blockquote>
-                        <p className=' text-sm border-l-2 ml-2 border-l-red-500 pl-3 text-red-900'>
+                        <div className=' text-sm border-l-2 ml-2 border-l-red-500 pl-3 text-red-900'>
                             There has been a lot of speculation about the future of bitcoin in Australia
                             after the country's financial regulator said it would consider banning the
                             cryptocurrency. The Australian Securities and Investments Commission (ASIC)
                             said it was considering whether to ban the sale of bitcoin and other cryptocurrencies
-                        </p>
+                        </div>
                     </blockquote>
-                    <p className=' text-sm'>
+                    <div className=' text-sm'>
                         Due to the current happenings in the world, the price of bitcoin has collapsed in Australia after the country's
                         financial regulator said it would consider banning the cryptocurrency.
                         The Australian Securities and Investments Commission (ASIC) said it was
                         considering whether to ban the sale of bitcoin and other cryptocurrencies
                         to retail investors.
                         However we believe that the price of bitcoin will rise again in the coming months.
-                    </p>
+                    </div>
 
                 </div>
 
@@ -67,7 +67,7 @@ const FeedDetail = () => {
                     </div>
                 </IonCard>
             </IonFab>
-        </IonPage>
+        </IonPage >
     )
 }
 

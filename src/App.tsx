@@ -36,13 +36,15 @@ import MainMenu from './components/menu/MainMenu';
 import 'swiper/css';
 import { useSelector } from 'react-redux';
 import { selectUser } from './redux/userSlice';
+import { configureAxios } from './utils';
 
 setupIonicReact();
+configureAxios()
 
 const App: React.FC = () => {
 
   const user = useSelector(selectUser)
-  const authenticatedUser = user.email ? true : false;
+  const authenticatedUser = !!user?.email ? true : false;
 
 
   console.log({ user })

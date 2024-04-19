@@ -17,7 +17,7 @@ const MainRoutes = () => {
                     {
                         (Object.values(mainPages) as { url: string, page: () => JSX.Element }[]).map((route, index) => {
                             return (
-                                <Route exact path={route.url} component={route.page} />
+                                <Route key={index} exact path={route.url} component={route.page} />
                             )
                         })
                     }
@@ -80,10 +80,10 @@ export const mainPages = {
         url: "/history",
         page: HistoryPage
     },
-    // notFound: {
-    //     name: "Not Found",
-    //     url: "/*",
-    //     page: HomePage
-    // }
+    notFound: {
+        name: "Not Found",
+        url: "/",
+        page: HomePage
+    }
 
 }

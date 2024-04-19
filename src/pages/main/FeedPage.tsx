@@ -42,9 +42,9 @@ const FeedPage = () => {
                                             <IonChip color={'success'}>
                                                 {news.cat}
                                             </IonChip>
-                                            <p className='text-white pl-3'>
+                                            <div className='text-white pl-3'>
                                                 {news.description}
-                                            </p>
+                                            </div>
                                         </div>
                                     </IonCard>
                                 </SwiperSlide>
@@ -74,19 +74,19 @@ const FeedPage = () => {
                                 topFullNews.map((news, index) => (
                                     <IonItem key={index} className='p-2' lines='none' routerLink={mainPages.feed.url + "/1"}>
                                         <img slot='start' src={news.avatar} alt="" className='rounded-md w-16 h-16 object-cover' />
-                                        <p>
+                                        <div>
                                             <div className="flex items-center gap-1">
                                                 <img src={news.avatar} alt="" className="w-5 h-5 rounded-full bg-cover" />
-                                                <p>Martin Pk</p>
+                                                <div>Martin Pk</div>
 
                                             </div>
-                                            <p className='font-medium text-sm'>
+                                            <div className='font-medium text-sm'>
                                                 {news.desc}
-                                            </p>
-                                            <p className='text-xs text-gray-400 flex items-center gap-2'>
+                                            </div>
+                                            <div className='text-xs text-gray-400 flex items-center gap-2'>
                                                 {news.date} <span className="w-[2px] h-[2px] rounded-full bg-gray-400"></span> {news.cat}
-                                            </p>
-                                        </p>
+                                            </div>
+                                        </div>
                                         <IonButtons slot='end'>
                                             <IonButton>
                                                 <IonIcon icon={bookmarkOutline} />
@@ -99,7 +99,7 @@ const FeedPage = () => {
                     </div>
                 </main>
 
-            </IonContent>
+            </IonContent >
         </IonPage >
     )
 }

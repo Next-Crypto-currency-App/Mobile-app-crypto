@@ -6,7 +6,7 @@ const ItemsLoader = () => {
         <div>
             {
                 Array(15).fill(0).map((_, index) => (
-                    <div className="flex items-center gap-x-3">
+                    <div key={index} className="flex items-center gap-x-3">
                         <IonSkeletonText className='w-32 h-10 rounded-md' animated />
                         <IonSkeletonText className='w-full h-10 rounded-md' animated />
                     </div>

@@ -20,18 +20,18 @@ const WatchListSection: React.FC<{ cryptocurrencies: typeof cryptocurrencies }> 
                     return (
                         <IonItem key={index} lines='full' className='py-[2px]'>
                             <img className='w-10 h-10' slot='start' src={crypto.image_url} />
-                            <p>
+                            <div>
                                 <h2>
                                     {crypto.name}
                                 </h2>
-                                <p>
+                                <div>
                                     {crypto.short_name}
-                                </p>
-                            </p>
-                            <p slot='end' className='text-end'>
-                                <p>${crypto.amount}</p>
-                                <p>{crypto.change < 0 ? <small className='text-red-400'>{crypto.change}</small> : <small className='text-green-400'>+{crypto.change}</small>}</p>
-                            </p>
+                                </div>
+                            </div>
+                            <div slot='end' className='text-end'>
+                                <div>${crypto.amount}</div>
+                                <div>{crypto.change < 0 ? <small className='text-red-400'>{crypto.change}</small> : <small className='text-green-400'>+{crypto.change}</small>}</div>
+                            </div>
                         </IonItem>
                     )
                 })

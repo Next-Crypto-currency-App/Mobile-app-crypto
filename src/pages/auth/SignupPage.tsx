@@ -2,69 +2,71 @@ import { IonPage, IonContent, IonInput, IonCheckbox, IonButton } from "@ionic/re
 import { useState } from "react";
 import AppProgressHeader from "../../components/@/AppProgressHeader";
 import { authPages } from "../../routes/authRoutes";
-import { useDispatch } from "react-redux";
 import AppButtonText from "../../components/@/AppButtonText";
-import { setUserState } from "../../redux/userSlice";
 import { useHistory } from "react-router";
+import AppPasswordInput from "../../components/@/AppPasswordInput";
+import { useAuth } from "../../hooks/useAuth";
 
 const SignupPage = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [isChecked, setIsChecked] = useState(false);
     const [loading, setLoading] = useState(false)
-    const dispatch = useDispatch();
     const history = useHistory()
+    const [password, setPassword] = useState("")
+    const { createUser } = useAuth()
 
     // Form submission
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
 
         const user = {
-            firstName,
-            lastName,
-            email
+            "name": name,
+            "username": username,
+            "email": email,
+            "password": password,
+            "suspended": false,
+            "ip_address": "0.0.0.0",
+            "location": "Cameroon, Douala",
+            "longitude": "682346234",
+            "latitude": "682346234"
         }
 
-        console.log(user)
+        setLoading(true);
 
-        setLoading(true)
-
-        setTimeout(() => {
-            dispatch(setUserState(user))
+        const result = await createUser(user)
+        if (result) {
             history.push(authPages.verifyEmail.url)
-            setLoading(false)
-        }, 3000);
-
-
+        }
+        setLoading(false)
 
     };
 
 
-
     return (
         <IonPage>
-            <AppProgressHeader value={1} total={3} />
+            <AppProgressHeader value={1} total={2} />
             <IonContent className='ion-padding space-y-10'>
                 <form onSubmit={handleSubmit} className='space-y-3'>
                     <div>
-                        <label>First Name</label>
+                        <label>Username</label>
                         <IonInput
                             fill='outline'
                             required
                             className='border rounded-md ion-padding-horizontal'
-                            value={firstName}
-                            onIonInput={(e) => setFirstName(e.target.value as string)}
+                            value={name}
+                            onIonInput={(e) => setName(e.target.value as string)}
                         />
                     </div>
                     <div>
-                        <label>Last Name</label>
+                        <label>Name</label>
                         <IonInput
                             fill='outline'
                             required
                             className='border rounded-md ion-padding-horizontal'
-                            value={lastName}
-                            onIonInput={(e) => setLastName(e.target.value as string)}
+                            value={username}
+                            onIonInput={(e) => setUsername(e.target.value as string)}
                         />
                     </div>
                     <div>
@@ -78,18 +80,25 @@ const SignupPage = () => {
                             onIonInput={(e) => setEmail(e.target.value as string)}
                         />
                     </div>
-                    <p className='flex gap-x-2 text-sm pt-1'>
+                    <div>
+                        <label>Password</label>
+                        <AppPasswordInput
+                            value={password}
+                            onChange={(value) => setPassword(value as string)}
+                        />
+                    </div>
+                    <div className='flex gap-x-2 text-sm pt-1'>
                         <IonCheckbox
                             slot='start'
                             checked={isChecked}
                             onIonChange={(e) => setIsChecked(e.target.checked)}
                         />
-                        <p>
+                        <div>
                             I certify that I am 18 years old or older, I agree to the User Agreement, and I have read the Privacy Policy.
-                        </p>
-                    </p>
+                        </div>
+                    </div>
                     <div className="pt-3">
-                        <IonButton type="submit" expand='block' onClick={handleSubmit}>
+                        <IonButton type="submit" expand='block'>
                             <AppButtonText loading={loading}>Create Account</AppButtonText>
                         </IonButton>
                     </div>

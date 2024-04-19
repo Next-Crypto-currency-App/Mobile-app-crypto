@@ -13,9 +13,9 @@ const SetPasswordPage = () => {
 
                 <div className='text-center'>
                     <h2 className='font-bold text-xl'>Password Reset</h2>
-                    <p>
+                    <div>
                         Set a strong password for your account.
-                    </p>
+                    </div>
                 </div>
                 <form action="" className='space-y-1'>
                     <div className='space-y-1'>

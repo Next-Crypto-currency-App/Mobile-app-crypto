@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
+import { getStorage } from '../utils/storage';
 
 interface UserState {
     id?: number; // Optional for flexibility
+    username?: string;
     name?: string;
     email?: string;
 }
@@ -30,8 +32,9 @@ const userSlice = createSlice({
 export const { setUserState, logoutUser } = userSlice.actions;
 export const selectUser = (state: RootState) => {
     if (state.user.email) return state.user
-    const localUser = localStorage.getItem('user');
-    if (localUser) return JSON.parse(localUser);
-    return {}
+    const localUser = getStorage('user');
+    if (localUser) localUser;
+    // console.log(localUser, "local user")
+    return localUser
 };
 export default userSlice.reducer;

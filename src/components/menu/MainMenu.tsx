@@ -5,10 +5,11 @@ import { toggleDarkTheme } from '../../utils';
 import { useDispatch } from 'react-redux';
 import { logoutUser, selectUser } from '../../redux/userSlice';
 import { useSelector } from 'react-redux';
+import { getStorage } from '../../utils/storage';
 
 const MainMenu = () => {
-    const themeLocalStorage = localStorage.getItem('theme')
-    const [themeValue, setThemeValue] = useState(themeLocalStorage === 'dark' ? true : false)
+    const themeLocalStorage = "light"
+    const [themeValue, setThemeValue] = useState(themeLocalStorage !== 'light' ? true : false)
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
 
@@ -36,7 +37,7 @@ const MainMenu = () => {
                     <div className="flex justify-center flex-col items-center py-10 min-h-[20vh] gap-y-1">
                         <img src="/assets/avatar.svg" className='w-20' alt="" />
                         <h2>Joh Moris</h2>
-                        <p>{user.email}</p>
+                        <div>{user.email}</div>
                     </div>
                 </IonToolbar>
             </IonHeader>
