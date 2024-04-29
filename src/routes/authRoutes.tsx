@@ -8,6 +8,7 @@ import LandingPage from '../pages/auth/LandingPage'
 import VerifyEmailPage from '../pages/auth/VerifyEmailPage'
 import SignupPage from '../pages/auth/SignupPage'
 import SetPasswordPage from '../pages/auth/SetPasswordPage'
+import ForgotPassword from '../pages/auth/ForgotPassword'
 
 
 
@@ -52,6 +53,11 @@ export const authPages = {
         name: "set-password",
         url: "/set-password",
         page: SetPasswordPage
+    },
+    forgotPassword: {
+        name: "forgot-password",
+        url: "/forgot-password",
+        page: ForgotPassword
     },
 
 }

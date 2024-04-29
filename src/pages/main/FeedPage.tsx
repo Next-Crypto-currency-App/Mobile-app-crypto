@@ -1,10 +1,19 @@
 import { IonAvatar, IonBadge, IonButton, IonButtons, IonCard, IonChip, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonItem, IonMenuButton, IonPage, IonSearchbar, IonSegment, IonSegmentButton, IonSelect, IonTitle, IonToolbar, IonicSlides } from '@ionic/react'
 import { arrowDown, arrowUp, bookmarkOutline, cardOutline, eyeOutline, moonOutline, notifications, notificationsOutline, qrCodeOutline, scanOutline, searchOutline } from 'ionicons/icons'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { mainPages } from '../../routes/mainRoutes'
+import useFeed from '../../hooks/useFeed'
 
 const FeedPage = () => {
+
+    const { getFeed } = useFeed();
+
+    useEffect(() => {
+        console.log(getFeed())
+    }, [])
+
+
     return (
         <IonPage>
             <IonHeader className='ion-no-border'>

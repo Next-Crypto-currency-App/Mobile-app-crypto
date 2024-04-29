@@ -50,22 +50,26 @@ const SignupPage = () => {
             <IonContent className='ion-padding space-y-10'>
                 <form onSubmit={handleSubmit} className='space-y-3'>
                     <div>
-                        <label>Username</label>
-                        <IonInput
-                            fill='outline'
-                            required
-                            className='border rounded-md ion-padding-horizontal'
-                            value={name}
-                            onIonInput={(e) => setName(e.target.value as string)}
-                        />
-                    </div>
-                    <div>
                         <label>Name</label>
                         <IonInput
                             fill='outline'
                             required
                             className='border rounded-md ion-padding-horizontal'
+                            value={name}
+                            name="Name"
+                            type="text"
+                            onIonInput={(e) => setName(e.target.value as string)}
+                        />
+                    </div>
+                    <div>
+                        <label>Username</label>
+                        <IonInput
+                            fill='outline'
+                            required
+                            name="username"
+                            className='border rounded-md ion-padding-horizontal'
                             value={username}
+                            type="text"
                             onIonInput={(e) => setUsername(e.target.value as string)}
                         />
                     </div>
@@ -75,6 +79,7 @@ const SignupPage = () => {
                             fill='outline'
                             required
                             type="email"
+                            name="email"
                             className='border rounded-md ion-padding-horizontal'
                             value={email}
                             onIonInput={(e) => setEmail(e.target.value as string)}

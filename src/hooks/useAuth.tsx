@@ -1,6 +1,6 @@
 import { useIonToast } from "@ionic/react";
 import axios from "axios";
-
+import { handleError, onResult } from "../utils/api";
 
 
 export interface SignupResponse {
@@ -22,21 +22,15 @@ export function useAuth() {
         password: string;
         suspended: boolean;
     }) {
+
+        console.log(data, ">>>>>>>> Request");
         // axios request
         return axios.post("/users/create", data).then((res: any) => {
-            console.log(res)
-            if (res && res.success) {
+            return onResult(res, toast, () => {
                 localStorage.setItem("auth", JSON.stringify(res))
                 localStorage.setItem("email", data.email)
-                return res as SignupResponse
-            } else {
-                toast({ message: res.message || "an unexpected error occured. Please try again later", color: 'danger', duration: 4000 })
-            }
-        })
-            .catch((err) => {
-                console.log(err)
-                return false;
-            })
+            });
+        }).catch((e) => (handleError(e, toast)))
 
     }
 
@@ -46,19 +40,9 @@ export function useAuth() {
         "otp": string,
     }) {
         return axios.post("/users/verify_email", data).then((res: any) => {
-            console.log(res)
-            if (res && res.success) {
-                // localStorage.setItem("auth", JSON.stringify(res))
-                return res as SignupResponse;
-            } else {
-                toast({ message: res.message || "Unexpected error occured. please contact support", color: "danger", duration: 4000 })
-                false;
-            }
-        })
-            .catch((err) => {
-                console.log(err)
-                return false;
-            })
+            return onResult(res, toast)
+
+        }).catch((e) => (handleError(e, toast)))
     }
 
     function resendOTP(data: {
@@ -66,43 +50,57 @@ export function useAuth() {
     }) {
 
         return axios.post("/users/resend_otp", data).then((res: any) => {
-            console.log(res, "resend otp")
-            if (res && res.success) {
-                toast({ message: "Verification code has been resent", duration: 4000 })
-                return res as SignupResponse;
-            } else {
-                toast({ message: res.message || "Unexpected error occured. please contact support", color: 'danger', duration: 4000 })
-                false;
-            }
-        })
-            .catch((err) => {
-                console.log(err)
-                toast({ message: "Unexpected error occured. please contact support", color: 'danger', duration: 4000 })
-                return false;
-            })
+            return onResult(res, toast)
+        }).catch((e) => (handleError(e, toast)))
     }
 
     function login(data: {
         "email": string,
         password: string
     }) {
-        console.log({ data });
 
         return axios.post("/users/login", data).then((res: any) => {
-            if (res && res.success) {
-                return res as { success: boolean, username: string, email: string };
-            } else {
-                console.log(res)
-                toast({ message: res.message || "Unexpected error occured. please contact support", color: 'danger', duration: 4000 })
-                false;
-            }
-        })
-            .catch((err) => {
-                console.log(err)
-                toast({ message: "Unexpected error occured. please contact support", color: 'danger', duration: 4000 })
-                return false;
-            })
+            return onResult(res, toast)
+        }).catch((e) => (handleError(e, toast)))
     }
 
-    return { createUser, verifyEmail, resendOTP, login }
+    async function forgotPassword(data: {
+        "email": string,
+    }) {
+        return axios.post("/users/forgot_password", data).then((res: any) => {
+            return onResult(res, toast);
+        }).catch((e) => (handleError(e, toast)))
+
+
+    }
+
+    async function verifyOTPCode(data: {
+        "email": string,
+        "otp": string
+    }) {
+        return axios.post("/users/verify_otp", data).then((res: any) => {
+            return onResult(res, toast);
+        }).catch((e) => (handleError(e, toast)))
+    }
+
+    async function resetPassword(data: {
+        "email": string,
+        "password": string
+    }) {
+        return axios.post("/users/reset_password", data).then((res: any) => {
+            return onResult(res, toast, () => {
+                toast({ message: "Password Reset Successfull", duration: 4000, color: "success" })
+            });
+        }).catch((e) => (handleError(e, toast)))
+    }
+    async function logout() {
+        console.log("logging out...")
+        return axios.get("/users/logout").then((res: any) => {
+            return onResult(res, toast);
+
+        }).catch((e) => (handleError(e, toast)))
+    }
+
+
+    return { createUser, verifyOTPCode, verifyEmail, resetPassword, resendOTP, login, forgotPassword, logout }
 }

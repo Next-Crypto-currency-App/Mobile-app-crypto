@@ -16,7 +16,11 @@ function getStorage(name: string) {
         if (result) {
             return JSON.parse(result);
         }
+        else {
+            return null
+        }
     } catch (e) {
+        console.log(e)
         return result;
     }
     return null;

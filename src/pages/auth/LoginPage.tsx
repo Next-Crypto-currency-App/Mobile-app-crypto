@@ -20,13 +20,16 @@ const LoginPage = () => {
     async function submit(e: React.FormEvent) {
         e.preventDefault()
         setLoading(true)
-        const result = await login({ email, password }) as { success: boolean, username: string, email: string }
+        const result = await login({ email, password }) as { success: boolean, username: string, email: string, accessToken: string, accountComplete: boolean }
         setLoading(false)
 
         if (result.success) {
+            console.log(result);
             dispatch(setUserState({
+                accessToken: result.accessToken,
                 username: result.username,
-                email: result.email
+                email: result.email,
+                accountComplete: result.accountComplete
             }));
             location.href = "/"
             setTimeout(() => {
@@ -41,9 +44,11 @@ const LoginPage = () => {
         <IonPage>
 
             <IonContent className='ion-padding space-y-10'>
-                <div>
-
+                <div className='flex justify-between'>
                     <h2 className='font-bold text-xl'>Login</h2>
+                    <IonButtons>
+                        <IonButton mode='ios' size='small' routerLink={authPages.forgotPassword.url}>Forgot Password</IonButton>
+                    </IonButtons>
                 </div>
                 <form onSubmit={submit} className='space-y-3'>
                     <div>

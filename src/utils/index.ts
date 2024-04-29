@@ -3,6 +3,7 @@
 import axios from 'axios';
 import { encryptData, decryptData } from './encryption';
 import { getStorage } from './storage';
+import { logoutUser } from '../redux/userSlice';
 
 export const toggleDarkTheme = (shouldAdd: boolean) => {
     document.body.classList.toggle('dark', shouldAdd);
@@ -50,9 +51,14 @@ export function configureAxios() {
         fetch(import.meta.env.VITE_IPAPI)
             .then((response) => response.json())
             .then((data) => {
-                axios.defaults.headers.common['Authorization'] = `${getStorage(
-                    `${import.meta.env.VITE_AUTH_KEY}`,
-                )}`;
+
+
+                const user = JSON.parse(localStorage.getItem(
+                    `${import.meta.env.VITE_USER}`
+                ) as string);
+
+                axios.defaults.headers.common['Authorization'] = `Bearer ${user?.accessToken}`;
+                axios.defaults.headers.common['Content-Type'] = `application/json`;
                 axios.defaults.headers.common['ip'] = data.ip;
                 axios.defaults.headers.common[
                     'location'
@@ -60,6 +66,8 @@ export function configureAxios() {
                 axios.defaults.headers.common[
                     'ngrok-skip-browser-warning'
                 ] = `true`;
+
+
 
             });
     })();

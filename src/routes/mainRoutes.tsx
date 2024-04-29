@@ -7,6 +7,7 @@ import FeedPage from '../pages/main/FeedPage'
 import FeedDetail from '../pages/main/FeedDetail'
 import HistoryPage from '../pages/main/HistoryPage'
 import AssetsPage from '../pages/main/AssetsPage'
+import { profilePages } from '../pages/profile/KYCMenu'
 
 const MainRoutes = () => {
     return (
@@ -84,6 +85,7 @@ export const mainPages = {
         name: "Not Found",
         url: "/",
         page: HomePage
-    }
+    },
+    ...profilePages
 
 }

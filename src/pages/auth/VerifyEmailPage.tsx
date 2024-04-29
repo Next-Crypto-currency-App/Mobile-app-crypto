@@ -1,5 +1,5 @@
 import { IonPage, IonHeader, IonContent, IonButtons, IonButton, IonIcon, IonProgressBar, IonInput, IonCheckbox, IonToolbar } from '@ionic/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { authPages } from '../../routes/authRoutes'
 import { close } from 'ionicons/icons'
 import { Link, useHistory } from 'react-router-dom'
@@ -16,6 +16,7 @@ const VerifyEmailPage = () => {
     const [email, setEmail] = useState(getStorage("email") || "")
     const { verifyEmail, resendOTP } = useAuth()
     const [lastResend, setLastResend] = useState(0)
+    const [count, setCount] = useState(0)
     const history = useHistory()
 
     async function submit(e: React.FormEvent) {
@@ -47,12 +48,27 @@ const VerifyEmailPage = () => {
             }) as SignupResponse
             if (result) {
                 setLastResend(Date.now())
+                setCount(60 * 1000);
             }
         } else {
             history.goBack()
         }
         setLoading(false)
     }
+
+
+    useEffect(() => {
+
+        setInterval(() => {
+            if (count > 0) {
+                setCount(count - 1000);
+            }
+        }, 1000)
+
+        return () => {
+
+        }
+    }, [])
 
     return (
         <IonPage>
@@ -76,7 +92,7 @@ const VerifyEmailPage = () => {
                             fill='outline' className='border rounded-md ion-padding-horizontal' />
                     </div>
                     <div className='flex justify-end'>
-                        <IonButton disabled={Math.abs(lastResend - Date.now()) < 60000 || false} onClick={resend} slot='end' size='small' fill='clear'>Resend Code</IonButton>
+                        <IonButton disabled={Math.abs(lastResend - Date.now()) < 60000 || false} onClick={resend} slot='end' size='small' fill='clear'> {count > 0 ? <>Resend in {count / 1000}s </> : "Resend Code"}</IonButton>
                     </div>
                     <div className='space-y-2 pt-3'>
                         <IonButton type="submit" expand='block'>

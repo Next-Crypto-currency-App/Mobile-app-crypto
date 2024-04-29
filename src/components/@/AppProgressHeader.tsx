@@ -2,14 +2,14 @@ import { IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, IonProgressBar }
 import { close } from 'ionicons/icons'
 import React from 'react'
 
-const AppProgressHeader: React.FC<{ value: number, total: number }> = ({ total, value }) => {
+const AppProgressHeader: React.FC<{ backURL?: string; value: number, total: number }> = ({ total, value, backURL }) => {
     return (
         <IonHeader className='ion-no-border'>
             <IonToolbar className=''>
                 <div>
                     <div className='flex items-center justify-between '>
                         <IonButtons slot='start'>
-                            <IonButton routerLink='/' routerDirection='root' routerOptions={{ unmount: true }} color='dark' >
+                            <IonButton routerLink={backURL ?? '/'} routerDirection='root' routerOptions={{ unmount: true }} color='dark' >
                                 <IonIcon icon={close} />
                             </IonButton>
                         </IonButtons>

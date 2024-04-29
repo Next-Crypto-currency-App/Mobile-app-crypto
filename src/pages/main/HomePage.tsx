@@ -3,9 +3,13 @@ import { arrowDown, arrowUp, cardOutline, chevronDown, eyeOutline, moonOutline, 
 import React, { useState } from 'react'
 import WatchListSection from '../../components/home/WatchListSection'
 import HomeWalletBalance from '../../components/home/HomeWalletBalance'
+import { mainPages } from '../../routes/mainRoutes'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../redux/userSlice'
 
 const HomePage = () => {
     const [currentList, setCurrentList] = useState<"watch" | "all">("watch");
+    const user = useSelector(selectUser)
 
     return (
         <IonPage>
@@ -26,7 +30,12 @@ const HomePage = () => {
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>
+            {!user?.accountComplete && <div className='font-bold px-3 py-1 bg-yellow-500 flex justify-between items-center'>
+                <small>Complete your profit</small>
+                <IonButton color={'dark'} size='small' routerLink={mainPages.kycMenu.url}>Complete</IonButton>
+            </div>}
             <IonContent className='ion-padding'>
+
                 <main className='space-y-1 relative'>
                     <HomeWalletBalance />
                     <div className="flex justify-between text-center border-b">

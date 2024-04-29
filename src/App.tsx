@@ -37,6 +37,8 @@ import 'swiper/css';
 import { useSelector } from 'react-redux';
 import { selectUser } from './redux/userSlice';
 import { configureAxios } from './utils';
+import { useEffect } from 'react';
+import { decryptData } from './utils/encryption';
 
 setupIonicReact();
 configureAxios()
@@ -45,9 +47,6 @@ const App: React.FC = () => {
 
   const user = useSelector(selectUser)
   const authenticatedUser = !!user?.email ? true : false;
-
-
-  console.log({ user })
 
   return (
     <IonApp>

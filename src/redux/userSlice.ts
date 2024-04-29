@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
-import { getStorage } from '../utils/storage';
+import { getStorage, setStorage } from '../utils/storage';
 
 interface UserState {
     id?: number; // Optional for flexibility
     username?: string;
     name?: string;
     email?: string;
+    accessToken?: string;
+    accountComplete?: boolean;
 }
 
 
@@ -19,7 +21,7 @@ const userSlice = createSlice({
     reducers: {
         setUserState(state, action: { payload: UserState }) {
             state = action.payload; // Immutably assign new user data
-            localStorage.setItem('user', JSON.stringify(state)); // Store user data in local storage
+            setStorage(`${import.meta.env.VITE_USER}`, JSON.stringify(state)); // Store user data in local storage
         },
         logoutUser(state) {
             state = initialState; // Reset state to clear user info
@@ -32,9 +34,9 @@ const userSlice = createSlice({
 export const { setUserState, logoutUser } = userSlice.actions;
 export const selectUser = (state: RootState) => {
     if (state.user.email) return state.user
-    const localUser = getStorage('user');
+    const localUser = getStorage(`${import.meta.env.VITE_USER}`);
     if (localUser) localUser;
     // console.log(localUser, "local user")
-    return localUser
+    return localUser as UserState;
 };
 export default userSlice.reducer;

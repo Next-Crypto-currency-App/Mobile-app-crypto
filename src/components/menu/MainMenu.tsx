@@ -1,4 +1,4 @@
-import { IonAvatar, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonMenu, IonToggle, IonToolbar } from '@ionic/react'
+import { IonAvatar, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonLoading, IonMenu, IonToggle, IonToolbar, useIonLoading } from '@ionic/react'
 import { moonOutline, notificationsOutline, personOutline } from 'ionicons/icons'
 import React, { useEffect, useState } from 'react'
 import { toggleDarkTheme } from '../../utils';
@@ -6,12 +6,15 @@ import { useDispatch } from 'react-redux';
 import { logoutUser, selectUser } from '../../redux/userSlice';
 import { useSelector } from 'react-redux';
 import { getStorage } from '../../utils/storage';
+import { useAuth } from '../../hooks/useAuth';
 
 const MainMenu = () => {
     const themeLocalStorage = "light"
     const [themeValue, setThemeValue] = useState(themeLocalStorage !== 'light' ? true : false)
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
+    const { logout } = useAuth()
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
 
@@ -27,8 +30,13 @@ const MainMenu = () => {
 
     }, []);
 
-    function logout() {
-        dispatch(logoutUser())
+    async function logoutApp() {
+        setLoading(true)
+        const value = await logout();
+        if (value.success) {
+            dispatch(logoutUser());
+            setLoading(false)
+        }
     }
     return (
         <IonMenu contentId='main-menu-content'  >
@@ -36,12 +44,13 @@ const MainMenu = () => {
                 <IonToolbar>
                     <div className="flex justify-center flex-col items-center py-10 min-h-[20vh] gap-y-1">
                         <img src="/assets/avatar.svg" className='w-20' alt="" />
-                        <h2>Joh Moris</h2>
-                        <div>{user.email}</div>
+                        <h2 className='font-semibold capitalize'>{user?.username}</h2>
+                        <div>{user?.email}</div>
                     </div>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
+                <IonLoading isOpen={loading} onDidDismiss={() => setLoading(false)} message={"Logging out User!"}></IonLoading>
                 <div className='space-y-[2px] py-3'>
                     <IonItem lines='none' >
                         <IonIcon slot='start' icon={moonOutline}></IonIcon>
@@ -75,7 +84,7 @@ const MainMenu = () => {
                             <IonLabel>Support</IonLabel>
                         </IonItem>
                         <IonItem lines='none' button>
-                            <IonLabel color={'danger'} onClick={logout}>Logout</IonLabel>
+                            <IonLabel color={'danger'} onClick={logoutApp}>Logout</IonLabel>
                         </IonItem>
                     </IonList>
                 </div>
