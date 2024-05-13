@@ -94,13 +94,18 @@ export function useAuth() {
         }).catch((e) => (handleError(e, toast)))
     }
     async function logout() {
-        console.log("logging out...")
         return axios.get("/users/logout").then((res: any) => {
             return onResult(res, toast);
 
         }).catch((e) => (handleError(e, toast)))
     }
 
+    async function verify2FAToken(data: { token: string, email: string }) {
+        return axios.post("/users/verify_2fa", data).then((res: any) => {
+            return onResult(res, toast);
+        }).catch((e) => (handleError(e, toast)))
+    }
 
-    return { createUser, verifyOTPCode, verifyEmail, resetPassword, resendOTP, login, forgotPassword, logout }
+
+    return { createUser, verifyOTPCode, verifyEmail, resetPassword, resendOTP, login, forgotPassword, logout, verify2FAToken }
 }

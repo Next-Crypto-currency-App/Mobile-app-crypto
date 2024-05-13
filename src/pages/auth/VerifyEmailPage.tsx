@@ -102,6 +102,7 @@ const VerifyEmailPage = () => {
                 </form>
 
 
+
             </IonContent>
         </IonPage>
     )

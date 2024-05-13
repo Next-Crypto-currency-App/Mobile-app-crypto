@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { setUserState } from '../../redux/userSlice'
 import AppButtonText from '../../components/@/AppButtonText'
 import { useAuth } from '../../hooks/useAuth'
+import { useHistory, useLocation } from 'react-router'
 
 const LoginPage = () => {
 
@@ -15,26 +16,33 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
     const { login } = useAuth()
+    const history = useHistory()
 
 
     async function submit(e: React.FormEvent) {
         e.preventDefault()
         setLoading(true)
-        const result = await login({ email, password }) as { success: boolean, username: string, email: string, accessToken: string, accountComplete: boolean }
+        const result = await login({ email, password }) as { success: boolean, username: string, email: string, accessToken: string, accountComplete: boolean, fa_auth: boolean, id: string }
         setLoading(false)
 
+
         if (result.success) {
-            console.log(result);
-            dispatch(setUserState({
-                accessToken: result.accessToken,
-                username: result.username,
-                email: result.email,
-                accountComplete: result.accountComplete
-            }));
-            location.href = "/"
-            setTimeout(() => {
-                location.reload()
-            }, 1000);
+
+            if (result.fa_auth) {
+                history.push(authPages.verify2FA.url, { email })
+            } else {
+                dispatch(setUserState({
+                    accessToken: result.accessToken,
+                    username: result.username,
+                    email: result.email,
+                    accountComplete: result.accountComplete,
+                    id: result.id
+                }));
+                location.href = "/"
+                setTimeout(() => {
+                    location.reload()
+                }, 1000);
+            }
         }
 
 

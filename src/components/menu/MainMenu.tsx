@@ -1,4 +1,4 @@
-import { IonAvatar, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonLoading, IonMenu, IonToggle, IonToolbar, useIonLoading } from '@ionic/react'
+import { IonAvatar, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonLoading, IonMenu, IonMenuToggle, IonToggle, IonToolbar, useIonLoading } from '@ionic/react'
 import { moonOutline, notificationsOutline, personOutline } from 'ionicons/icons'
 import React, { useEffect, useState } from 'react'
 import { toggleDarkTheme } from '../../utils';
@@ -7,6 +7,8 @@ import { logoutUser, selectUser } from '../../redux/userSlice';
 import { useSelector } from 'react-redux';
 import { getStorage } from '../../utils/storage';
 import { useAuth } from '../../hooks/useAuth';
+import { mainPages } from '../../routes/mainRoutes';
+import { securityPages } from '../../pages/security/securityPages';
 
 const MainMenu = () => {
     const themeLocalStorage = "light"
@@ -68,12 +70,17 @@ const MainMenu = () => {
                     </IonList>
                     <IonList className='ion-padding'>
                         <h3 className='font-semibold'>Security</h3>
-                        <IonItem lines='none' button>
-                            <IonLabel>PIN</IonLabel>
-                        </IonItem>
-                        <IonItem lines='none' button>
-                            <IonLabel>2FA</IonLabel>
-                        </IonItem>
+                        {
+                            Object.keys(securityPages).map((key, index) => {
+                                const page = (securityPages as any)[key] as typeof securityPages.setPin;
+                                if (!page.name) return;
+                                return <IonMenuToggle>
+                                    <IonItem routerLink={page.url} lines='none' button>
+                                        <IonLabel>{page.name}</IonLabel>
+                                    </IonItem>
+                                </IonMenuToggle>
+                            })
+                        }
                     </IonList>
                     <IonList className='ion-padding'>
                         <h3 className='font-semibold'>Others</h3>

@@ -9,6 +9,7 @@ import VerifyEmailPage from '../pages/auth/VerifyEmailPage'
 import SignupPage from '../pages/auth/SignupPage'
 import SetPasswordPage from '../pages/auth/SetPasswordPage'
 import ForgotPassword from '../pages/auth/ForgotPassword'
+import Verify2FA from '../pages/auth/Verify2FA'
 
 
 
@@ -58,6 +59,11 @@ export const authPages = {
         name: "forgot-password",
         url: "/forgot-password",
         page: ForgotPassword
+    },
+    verify2FA: {
+        name: "verify-2fa",
+        url: "/verify-2fa",
+        page: Verify2FA
     },
 
 }

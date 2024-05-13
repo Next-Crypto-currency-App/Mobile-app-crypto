@@ -30,9 +30,9 @@ const HomePage = () => {
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>
-            {!user?.accountComplete && <div className='font-bold px-3 py-1 bg-yellow-500 flex justify-between items-center'>
+            {!user?.accountComplete && <div className='font-bold px-3 py-1 bg-black flex justify-between items-center'>
                 <small>Complete your profit</small>
-                <IonButton color={'dark'} size='small' routerLink={mainPages.kycMenu.url}>Complete</IonButton>
+                <IonButton color={'warning'} fill='outline' size='small' routerLink={"/"}>Complete</IonButton>
             </div>}
             <IonContent className='ion-padding'>
 

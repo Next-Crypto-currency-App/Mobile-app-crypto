@@ -3,12 +3,14 @@ import { RootState } from './store';
 import { getStorage, setStorage } from '../utils/storage';
 
 interface UserState {
-    id?: number; // Optional for flexibility
+    id?: string; // Optional for flexibility
     username?: string;
     name?: string;
     email?: string;
     accessToken?: string;
     accountComplete?: boolean;
+    fa_auth?: boolean,
+
 }
 
 
